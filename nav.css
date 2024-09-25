@@ -1,6 +1,88 @@
 nav#main-nav {
   background-color: rgb(208, 15, 41);
   width: 100%;
+  height: 4rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: flex;
+}
 
-  display: none;
+nav#main-nav > div#main-logo-container {
+  height: 80%;
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  place-self: center;
+  margin-left: 2%;
+}
+
+nav#main-nav > div#main-logo-container > img {
+  height: 90%;
+  width: auto;
+  aspect-ratio: 1/1;
+  margin: 0;
+  padding: 0;
+}
+
+nav#main-nav > div#page-item {
+  width: 90%;
+  height: 100%;
+  place-self: center normal;
+  margin: 3em 0 0 0;
+  padding: 0;
+}
+
+nav#main-nav > div#page-item > ul {
+  list-style-type: none;
+  list-style: none;
+  display: flex;
+  flex-direction: row-column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+nav#main-nav > div#page-item > ul > li {
+  width: fit-content;
+  margin: 0 0.7rem;
+}
+
+nav#main-nav > div#page-item > ul > li.active-page a {
+  color: #c6a2a4;
+}
+
+nav#main-nav > div#page-item > ul > li a {
+  font-family: "Empera Soft";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.3rem;
+  font-variant: small-caps;
+  text-decoration: none;
+  color: #f0f0f0;
+  width: fit-content;
+  text-align: center;
+}
+
+nav#main-nav > div#menu-burger {
+  height: 80%;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 0;
+  margin-right: 2%;
+  place-self: center;
+}
+
+nav#main-nav > div#menu-burger > svg {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  stroke: #fff;
+  stroke-width: 2;
 }

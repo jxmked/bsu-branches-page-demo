@@ -1,62 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="eng">
-  <meta name="viewport" content="initial-scale=1, width=320,user-scalable=no" />
+  <meta
+    name="viewport"
+    content="initial-scale=1, width=device-width,user-scalable=no"
+  />
   <head>
     <title>BSU Branch Page Demo</title>
-    <link rel="preload" href="assets/main-bg.jpg">
+    <link rel="preload" href="assets/main-bg.jpg" />
 
-    <link rel="preload" href="assets/vendor/Empara-Soft-Vintage/Empera-SoftVintage.woff">
-    <link rel="preload" href="assets/vendor/Empara-Soft-Vintage/Empera-SoftVintage.woff2">
-    <link rel="stylesheet" href="assets/vendor/Empara-Soft-Vintage/stylesheet.css">
+    <link
+      rel="preload"
+      href="assets/vendor/Empara-Soff/Empera-Soft.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="assets/vendor/Empara-Soft/stylesheet.css" />
 
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="nav.css" />
   </head>
   <body>
     <nav id="main-nav">
       <div id="main-logo-container">
-        <img
-          src="assets/bsu-logo.png"
-          alt="Batangas State University Logo"
-          id="main-logo"
-        />
+        <img src="assets/bsu-logo.png" alt="Batangas State University Logo" />
       </div>
+
       <div id="page-item">
         <ul>
           <li><a href="#">Mission</a></li>
           <li><a href="#">Vision</a></li>
           <li><a href="#">Overview</a></li>
-          <li>
-            <ul>
-              <li>
-                <a href="#">Offers</a>
-              </li>
-            </ul>
-          </li>
+          <li><a href="#">Offers</a></li>
           <li><a href="#">Enrollment</a></li>
-          <li>
-            <ul>
-              <li>
-                <a href="#">Branches</a>
-              </li>
-            </ul>
-          </li>
+          <li class="active-page"><a href="#">Branches</a></li>
           <li><a href="#">Accreditations</a></li>
-          <li>
-            <ul>
-              <li>
-                <a href="#">Affliations</a>
-              </li>
-            </ul>
-          </li>
+          <li><a href="#">Affliations</a></li>
         </ul>
       </div>
 
       <div id="menu-burger">
-        <img src="assets/icon/burger-menu.svg" alt="Toggle Menu">
+        <svg
+          width="800px"
+          height="800px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M4 18L20 18" stroke-linecap="round" />
+          <path d="M4 12L20 12" stroke-linecap="round" />
+          <path d="M4 6L20 6" stroke-linecap="round" />
+        </svg>
       </div>
     </nav>
     <div id="main-cover"></div>
+    
+    <div class="container">
+      
+    </div>
   </body>
 </html>

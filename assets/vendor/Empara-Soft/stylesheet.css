@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Empera Soft";
+  src:
+    url("Empera-Soft.woff2") format("woff2"),
+    url("Empera-Soft.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
