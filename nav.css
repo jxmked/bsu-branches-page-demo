@@ -8,6 +8,7 @@ nav#main-nav {
   transform: translate(-50%, 0%);
   display: flex;
   border-radius: 0 0 15px 15px;
+  overflow-x: hidden;
 }
 
 nav#main-nav > div#main-logo-container {
@@ -62,7 +63,7 @@ nav#main-nav > div#page-item > ul > li a {
   font-family: "Empera Soft";
   font-weight: normal;
   font-style: normal;
-  font-size: 1.7rem;
+  font-size: 1.7em;
   font-variant: small-caps;
   text-decoration: none;
   color: #f0f0f0;
