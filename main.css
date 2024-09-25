@@ -16,8 +16,7 @@ div#main-cover {
   background-image: url(./assets/main-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
-  /* background-attachment: fixed; */
+  background-position: center 60%;
   filter: grayscale(100%);
   backdrop-filter: greyscale(100%);
   width: 100%;
@@ -31,5 +30,8 @@ div#main-cover {
   top: 0;
   transform: translate(-50%, 0%);
   z-index: -999;
-  /* position: fixed; */
+}
+
+[hidden] {
+  display: none;
 }

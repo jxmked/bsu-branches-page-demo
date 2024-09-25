@@ -8,7 +8,7 @@ nav#main-nav {
   transform: translate(-50%, 0%);
   display: flex;
   border-radius: 0 0 15px 15px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 nav#main-nav > div#main-logo-container {
@@ -31,9 +31,9 @@ nav#main-nav > div#main-logo-container > img {
 
 nav#main-nav > div#page-item {
   width: 90%;
-  height: 100%;
+  height: auto;
   place-self: center normal;
-  margin: 3em 0 0 0;
+  margin: 1.3em 0 0 0;
   padding: 0;
 }
 
