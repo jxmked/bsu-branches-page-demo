@@ -1,0 +1,68 @@
+div.container {
+  width: 94%;
+  height: auto;
+  overflow: hidden;
+  display: relative;
+  z-index: 3;
+  margin: 2% auto;
+  padding: 1%;
+  background-color: rgba(225, 225, 220, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+
+div.container > div {
+//background-color: #000;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+div.container > div > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+  width: 100%;
+  height: 10rem;
+}
+
+div.container > div > ul > li {
+  width: 96%;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: repeat(3, 1fr);
+  grid-template-rows: 
+    "item-branch item-branch item-branch-desc item-branch-desc item-branch-desc"
+    "item-branch item-branch item-branch-desc item-branch-desc item-branch-desc"
+    "item-branch item-branch . . ."
+  ;
+}
+
+
+div.container > div > ul > li > div.item-branch-entrance {
+  height: 100%;
+  margin: 0;
+  width: auto;
+  padding: 0;
+  aspect-ratio: 4 / 3;
+  grid-area: "item-branch";
+  background-color: #00ff00;
+  overflow: hidden;
+}
+
+div.container > div > ul > li > div.item-branch-entrance > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 /3 ;
+}
+
+div.container > div > ul > li > div.item-branch-description {
+  grid-area: "item-branch-desc";
+  background-color: #ff0000;
+  //width: calc(5 / 3);
+  height: auto;
+}

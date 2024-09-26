@@ -6,11 +6,12 @@
   />
   <head>
     <title>BSU Branch Page Demo</title>
-    <link rel="preload" href="assets/main-bg.jpg" />
+    
+    <link rel="preload" href="assets/main-bg.jpg" as="image" />
 
     <link
       rel="preload"
-      href="assets/vendor/Empara-Soff/Empera-Soft.woff2"
+      href="assets/vendor/Empara-Soft/Empera-Soft.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -20,6 +21,7 @@
 
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="container.css" />
   </head>
   <body>
     <nav id="main-nav">
@@ -54,15 +56,29 @@
         </svg>
       </div>
     </nav>
+    
+    
+    
+    
     <div id="main-cover"></div>
     
-    <div class="container" hidden>
+    <div class="container">
       <div>
         <ul>
           <li>
-            <img src="assets/branches-img/Alangilan.jpg"/>
-            <h5>Alangilan</h5>
-            <p>Alangilan, Batangas</p>
+            <div class="item-branch-entrance">
+              <img alt="Alangilan branch main entrance" src="assets/branches-img/Alangilan.jpg"/>
+            </div>
+            <div class="item-branch-description">
+              <h5>Alangilan</h5>
+              <p>Alangilan, Batangas</p>
+            </div>
+            <div class="item-branch-see-more">
+              
+            </div>
+            <div class="hidden" hidden>
+Established in 1984, Alangilan is the second-oldest campus, located in Golden Country Homes, Brgy. Alangilan, Batangas City, on a 5.62-hectare property. It is home to the Knowledge, Innovation, and Science Technology (KIST) Park, the first KIST Park registered under the Philippine Economic Zone Authority.
+            </div>
           </li>
           
           
