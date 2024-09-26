@@ -6,6 +6,7 @@ nav#main-nav {
   display: flex;
   border-radius: 0 0 15px 15px;
   overflow: hidden;
+  min-width: 968;
 }
 
 nav#main-nav > div#main-logo-container {
