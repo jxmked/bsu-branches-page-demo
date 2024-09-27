@@ -145,3 +145,20 @@ div.container > div > ul > li > div.item-branch-see-more button {
 div.container > div > ul > li > div.item-branch-see-more button:hover {
   background-color: rgb(167, 33, 33);
 }
+
+/****   *****/
+
+/* Branch Main Entrance Image */
+div.container > div > ul > li:nth-child(even) > div.item-branch-entrance {
+  grid-area: 1 / 13 / 6 / 20;
+}
+
+/* Branch Placeholder */
+div.container > div > ul > li:nth-child(even) > div.item-branch-description {
+  grid-area: 1 / 1 / 4 / 13;
+}
+
+div.container > div > ul > li:nth-child(even) > div.item-branch-see-more {
+  grid-area: 4 / 1 / 6 / 4;
+}
+
