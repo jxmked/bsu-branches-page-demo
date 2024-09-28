@@ -1,5 +1,5 @@
 div.container {
-  width: min(94%, 760px);
+  width: min(94%, 830px);
   height: auto;
   overflow: hidden;
   display: relative;
@@ -30,7 +30,7 @@ div.container > div > ul {
 div.container > div > ul > li {
   width: 96%;
   height: 10rem;
-  margin: 1.2rem auto;
+  margin: 4rem auto;
   padding: 0;
   display: grid;
   gap: 2px 2px;
