@@ -146,6 +146,18 @@ div.container > div > ul > li > div.item-branch-see-more button:hover {
   background-color: rgb(167, 33, 33);
 }
 
+div.container > div > ul > li > div.item-branch-info {
+
+  width: 600px;
+  background-color: aqua;
+
+
+  position:absolute; 
+  top:0; left:0; right:0; bottom:0; 
+  margin:auto;
+
+}
+
 /****   *****/
 
 /* Branch Main Entrance Image */
@@ -161,4 +173,6 @@ div.container > div > ul > li:nth-child(even) > div.item-branch-description {
 div.container > div > ul > li:nth-child(even) > div.item-branch-see-more {
   grid-area: 4 / 1 / 6 / 4;
 }
+
+
 
