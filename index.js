@@ -28,11 +28,16 @@
     return li;
   }
 
+  function campus_click_event(element, func) {
+    element.addEventListener("click", func);
+  }
+
   w.addEventListener("DOMContentLoaded", async function () {
     const feed_data = await load_feed(feed_url);
 
-    const frag = new DocumentFragment();
     let index = 0;
+
+    const list_items = [];
 
     let ival = setInterval(function () {
       if (index >= feed_data.length) {
@@ -42,9 +47,17 @@
 
       const data = feed_data[index];
       const item = create_campus_item(data);
+      list_items.push(item);
 
       setTimeout(() => {
         item.classList.add("visible-now");
+
+        // Set the click event we can see it...
+        item.addEventListener("click", function () {
+          // Reset all
+          list_items.forEach((i) => i.classList.remove("selected"));
+          item.classList.add("selected");
+        });
       }, 200);
 
       document.querySelector("#campus-list-selection").appendChild(item);
