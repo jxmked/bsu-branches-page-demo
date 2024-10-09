@@ -1,0 +1,19 @@
+div.campus-description:not(.campus-prev-idle) {
+  overflow-y: auto;
+}
+
+div.campus-description > div {
+  width: 98%;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: transparent;
+  
+}
+
+div.campus-description > div >div:first-child {
+  width: 100%;
+  height: 90%;
+  background-color: aquamarine;
+
+}
