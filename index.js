@@ -1,4 +1,4 @@
-(async function (w, feed_url) {
+(function (w, feed_url) {
   async function load_feed(feed_url) {
     const res = await fetch(`./${feed_url}`, {
       method: "GET",
@@ -28,10 +28,6 @@
     return li;
   }
 
-  function campus_click_event(element, func) {
-    element.addEventListener("click", func);
-  }
-
   w.addEventListener("DOMContentLoaded", async function () {
     const feed_data = await load_feed(feed_url);
 
@@ -52,8 +48,11 @@
       setTimeout(() => {
         item.classList.add("visible-now");
 
-        // Set the click event we can see it...
+        // Set the click event if we can see it...
         item.addEventListener("click", function () {
+          // Skip already selected
+          if (item.classList.contains("selected")) return;
+
           // Reset all
           list_items.forEach((i) => i.classList.remove("selected"));
           item.classList.add("selected");

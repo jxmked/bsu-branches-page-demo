@@ -79,7 +79,12 @@ div.container > div.campus-list > ul > li {
   border-radius: 4px;
   /* border-top: 1px solid rgb(41, 41, 41);
   border-bottom: 1px solid rgb(41, 41, 41); */
-  transition: background-color 250ms ease-in-out;
+  opacity: 0;
+  transition: background-color 250ms ease-in-out, opacity 200ms ease-in;
+}
+
+div.container > div.campus-list > ul > li.visible-now {
+  opacity: 1;
 }
 
 div.container > div.campus-list > ul > li:first-child {
@@ -146,10 +151,23 @@ div.container > div.campus-description {
   padding: 1rem;
 }
 
+/* 
 div.container > div.campus-description.campus-prev-idle {
   display: flex;
   place-items: center;
   justify-content: center;
+  font-family: "Quicksand";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2rem;
+} */
+
+div.container > div.campus-description.campus-prev-idle::after {
+  content: "Select Campus";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-family: "Quicksand";
   font-weight: 700;
   font-style: normal;
