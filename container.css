@@ -5,7 +5,8 @@ div.container {
   display: block;
   z-index: 3;
   margin: 2% auto;
-  padding: 1%;
+  padding: 0;
+  padding-left: 1%;
   background-color: rgba(255, 255, 255, 0.5);
   /* background-color: rgb(229, 229, 234); */
   backdrop-filter: blur(4px);
@@ -26,9 +27,11 @@ div.container > div {
 div.container > div.campus-list {
   width: 33.3%;
   background-color: transparent;
-
+  padding: 0;
+  margin: 0;
   padding-right: 8px;
-  border-right: 2px dashed #c2bdbd;
+  height: 100%;
+  /* border-right: 2px dashed #c2bdbd; */
 }
 
 div.container > div.campus-list > ul {
@@ -85,10 +88,6 @@ div.container > div.campus-list > ul > li {
 
 div.container > div.campus-list > ul > li.visible-now {
   opacity: 1;
-}
-
-div.container > div.campus-list > ul > li:first-child {
-  margin-top: 0;
 }
 
 div.container > div.campus-list > ul > li:last-child {
@@ -148,19 +147,8 @@ div.container > div.campus-description {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 1rem;
+  padding: 0 1rem;
 }
-
-/* 
-div.container > div.campus-description.campus-prev-idle {
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  font-family: "Quicksand";
-  font-weight: 700;
-  font-style: normal;
-  font-size: 2rem;
-} */
 
 div.container > div.campus-description.campus-prev-idle::after {
   content: "Select Campus";

@@ -2,18 +2,122 @@ div.campus-description:not(.campus-prev-idle) {
   overflow-y: auto;
 }
 
+/* Scrollbar modification at campus list view */
+div.campus-description::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+div.campus-description::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+div.campus-description::-webkit-scrollbar-thumb {
+  background: #d36868;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+div.campus-description::-webkit-scrollbar-thumb:hover {
+  background: #cf1717;
+}
+
 div.campus-description > div {
   width: 98%;
   padding: 0;
   margin: 0 auto;
   box-sizing: border-box;
   background-color: transparent;
-  
 }
 
-div.campus-description > div >div:first-child {
+div.campus-description > div > div:first-child {
   width: 100%;
-  height: 90%;
-  background-color: aquamarine;
+  height: 12.6rem;
+  background-color: #fefefa;
+  position: relative;
+  display: block;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
 
+div.campus-description > div > div:first-child:hover::after {
+  backdrop-filter: blur(2px);
+  background-color: rgb(255, 255, 255, 0.4);
+  width: 100%;
+  /* height: 12.6rem; */
+  padding: calc((12.6rem / 2) - 1rem) 0;
+  display: block;
+  content: "Click to enlarge";
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: rgb(44, 44, 46);
+  font-family: "Quicksand";
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Title */
+div.campus-description > div > h3.campus-q-camp {
+  white-space: normal;
+  text-wrap: stable;
+  font-size: 2rem;
+  font-family: "Empera Soft";
+  font-variant: small-caps;
+  font-weight: normal;
+  font-style: normal;
+  margin: 0.7rem 0 0.2rem 0;
+  text-indent: 0.5rem;
+  color: rgb(44, 44, 46);
+}
+
+div.campus-description > div > span.campus-q-caddrs {
+  white-space: normal;
+  text-wrap: stable;
+  text-indent: 0.88rem;
+  font-family: "Quicksand";
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+  display: block;
+  width: 100%;
+  white-space: normal;
+  color: rgb(44, 44, 46);
+  border-bottom: 1px solid rgb(44, 44, 46);
+  margin: 0;
+}
+
+div.campus-description > div > p.campus-q-desc {
+  white-space: normal;
+  text-indent: 1.7rem;
+  color: rgb(44, 44, 46);
+  font-family: "Quicksand";
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+div.campus-description > div > div.campus-q-colg {
+  background-color: transparent;
+}
+
+div.campus-description > div > div.campus-q-colg > label {
+  color: rgb(44, 44, 46);
+  font-family: "Quicksand";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.2rem; 
+}
+
+div.campus-description > div > div.campus-q-colg > label {
+  color: rgb(44, 44, 46);
+  font-family: "Quicksand";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.2rem; 
 }
