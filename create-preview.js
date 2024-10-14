@@ -71,6 +71,7 @@ class CreatePreview {
     this.data = Object.assign({}, data);
     this.base_element = document.createElement("div");
     this.hero_branch_na = "no-prev.png";
+    this.is_rendered = false;
   }
 
   gc_branches_img() {
@@ -193,6 +194,9 @@ class CreatePreview {
   }
 
   render() {
+    if (this.is_rendered) return;
+    this.is_rendered = true;
+
     // Order of declaration relies on execution
     this.gc_branches_img();
     this.gc_title_n_addr();

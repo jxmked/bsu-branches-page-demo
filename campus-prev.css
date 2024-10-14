@@ -42,7 +42,11 @@ div.campus-description > div > div:first-child {
   cursor: pointer;
 }
 
-div.campus-description > div > div:first-child:hover::after {
+div.campus-description > div > div.no-enlarge-prev:first-child {
+  cursor: not-allowed;
+}
+
+div.campus-description > div > div:first-child:not(.no-enlarge-prev):hover::after {
   backdrop-filter: blur(2px);
   background-color: rgb(255, 255, 255, 0.4);
   width: 100%;
