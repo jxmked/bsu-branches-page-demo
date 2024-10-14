@@ -1,5 +1,6 @@
 div.campus-description:not(.campus-prev-idle) {
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Scrollbar modification at campus list view */
@@ -25,10 +26,21 @@ div.campus-description::-webkit-scrollbar-thumb:hover {
 
 div.campus-description > div {
   width: 98%;
-  padding: 0;
+  /* Kinda having extra space to breath */
+  padding: 0 0 5rem 0;
   margin: 0 auto;
   box-sizing: border-box;
   background-color: transparent;
+  position: absolute;
+  display: block;
+  opacity: 1;
+  z-index: auto;
+}
+
+div.campus-description > div.hidden {
+  display: none;
+  opacity: 0;
+  z-index: -99999;
 }
 
 div.campus-description > div > div:first-child {
@@ -133,11 +145,6 @@ div.campus-description > div > div.campus-q-colg > ul > li {
   font-style: normal;
   font-size: 1rem;
   white-space: normal;
-}
-
-div.campus-description > div > div.campus-q-cpts {
-  /* Kinda better having a space to breath underneath */
-  margin-bottom: 5rem;
 }
 
 div.campus-description > div > div.campus-q-cpts > div:first-child {

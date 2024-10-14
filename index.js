@@ -35,26 +35,31 @@
 
     const campus_container = document.getElementById("campus-prev-container");
 
-    const obj = new CreatePreview(feed_data[2]);
-    obj.render();
-
-    campus_container.classList.remove("campus-prev-idle");
-
-    campus_container.appendChild(obj.element());
-
     let index = 0;
 
     const list_items = [];
 
+    const frag = new DocumentFragment();
+    const prev_selection_list = new Array(feed_data.length);
+
     let ival = setInterval(function () {
       if (index >= feed_data.length) {
         clearInterval(ival);
+        campus_container.appendChild(frag);
+
         return;
       }
 
-      const data = feed_data[index];
+      let cur_index = index;
+
+      const data = feed_data[cur_index];
+
       const item = create_campus_item(data);
-      list_items.push(item);
+      list_items[cur_index] = item;
+
+      prev_selection_list[cur_index] = new CreatePreview(data).render().element;
+      prev_selection_list[cur_index].classList.add("hidden");
+      frag.appendChild(prev_selection_list[cur_index]);
 
       setTimeout(() => {
         item.classList.add("visible-now");
@@ -65,7 +70,14 @@
           if (item.classList.contains("selected")) return;
 
           // Reset all
-          list_items.forEach((i) => i.classList.remove("selected"));
+          list_items.forEach((i, y) => {
+            i.classList.remove("selected");
+            prev_selection_list[y].classList.add("hidden");
+          });
+
+          campus_container.classList.remove("campus-prev-idle");
+          prev_selection_list[cur_index].classList.remove("hidden");
+
           item.classList.add("selected");
         });
       }, 200);

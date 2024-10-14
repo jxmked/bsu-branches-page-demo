@@ -77,14 +77,18 @@ class CreatePreview {
   gc_branches_img() {
     const e = document.createElement("div");
 
-    let hero = this.hero_branch_na;
-
     if ("branch_hero" in this.data && !!this.data.branch_hero) {
-      hero = this.data.branch_hero;
+      e.setAttribute(
+        "style",
+        `background-image: url("./assets/branches-img/${this.data.branch_hero}")`
+      );
+    } else {
+      e.setAttribute(
+        "style",
+        `background-image: url("./assets/branches-img/${this.hero_branch_na}")`
+      );
+      e.classList.add("no-enlarge-prev");
     }
-
-    e.setAttribute("style", `background-image: url("./assets/branches-img/${hero}")`);
-    e.classList.add("no-enlarge-prev");
 
     this.base_element.appendChild(e);
   }
@@ -168,6 +172,7 @@ class CreatePreview {
 
     const phone = [];
     const email = [];
+    let is_contacts_avail = false;
 
     (this.data.contacts || []).forEach(function (item) {
       if (item.type.toLowerCase() === "phone") {
@@ -184,13 +189,15 @@ class CreatePreview {
 
     if (phone.length > 0) {
       base.appendChild(this.#gc_sub_contacts("Phones", phone));
+      is_contacts_avail = true;
     }
 
     if (email.length > 0) {
       base.appendChild(this.#gc_sub_contacts("Email", email));
+      is_contacts_avail = true;
     }
 
-    this.base_element.appendChild(base);
+    if (is_contacts_avail) this.base_element.appendChild(base);
   }
 
   render() {
@@ -203,9 +210,11 @@ class CreatePreview {
     this.gc_desc();
     this.gc_colg();
     this.gc_contacts();
+
+    return this;
   }
 
-  element() {
+  get element() {
     return this.base_element;
   }
 }

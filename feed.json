@@ -27,7 +27,8 @@
       "College of Industrial Technology",
       "College of Informatics and Computing Sciences"
     ],
-    "address": "Golden Country Homes, Brgy. Alangilan, Batangas City"
+    "address": "Golden Country Homes, Brgy. Alangilan, Batangas City",
+    "branch_hero": "Alangilan.jpg"
   },
   {
     "branch_name": "Nasugbu Campus",
@@ -46,7 +47,8 @@
       "College of Teacher Education",
       "Laboratory School"
     ],
-    "address": "Nasugbu Batangas"
+    "address": "Nasugbu Batangas",
+    "branch_hero": "nasugbu.jpg"
   },
   {
     "branch_name": "Balayan Campus",
@@ -62,7 +64,8 @@
       "College of Industrial Technology",
       "College of Informatics and Computing Sciences"
     ],
-    "address": "Brgy. Caloocan, Balayan, Batangas"
+    "address": "Brgy. Caloocan, Balayan, Batangas",
+    "branch_hero": "Balayan.png"
   },
   {
     "branch_name": "Lemery Campus",
@@ -74,7 +77,8 @@
       "College of Accountancy, Business, and Economics",
       "College of Teacher Education"
     ],
-    "address": "Brgy. Bagong Sikat, Lemery, Batangas"
+    "address": "Brgy. Bagong Sikat, Lemery, Batangas",
+    "branch_hero": "lemery.jpg"
   },
   {
     "branch_name": "Mabini Campus",
@@ -100,7 +104,23 @@
       "College of Arts and Sciences",
       "College of Accountancy, Business, Economics, and International Hospitality Management"
     ],
-    "address": "G. Leviste St., Poblacion, Malvar, Batangas"
+    "address": "G. Leviste St., Poblacion, Malvar, Batangas",
+    "branch_hero": "Malvar.jpg"
+  },
+  {
+    "branch_name": "Rosario Campus",
+    "article": "Located on a one-hectare land in Barangay Namunga, Rosario, Batangas. Rosario, a first-class municipality, supports thriving business and industry, and is home to nearly a hundred educational institutions and learning centers.",
+    "contacts": [
+      { "type": "phone", "value": "(043) 980-0385" },
+      { "type": "email", "value": "Rosario.campus@g.batstate-u.edu.ph" }
+    ],
+    "colleges": [
+      "College of Teacher Education",
+      "College of Industrial Technology",
+      "College of Accountancy, Business, Economics, and International Hospitality Management"
+    ],
+    "address": "Brgy. Namunga, Rosario, Batangas",
+    "branch_hero": "Rosario.png"
   },
   {
     "branch_name": "San Juan Campus",
