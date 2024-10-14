@@ -1,11 +1,9 @@
-{/* <div>
+/* <div>
 <!-- Campus main image -->
 <div style="background-image: url(./assets/branches-img/Alangilan.jpg)"></div>
 
 <h3 class="campus-q-camp">Pablo Borbon Campus</h3>
-<span class="campus-q-caddrs"
-  >Golden Country Homes, Brgy. Alangilan, Batangas City</span
->
+<span class="campus-q-caddrs">Golden Country Homes, Brgy. Alangilan, Batangas City</span>
 
 <p class="campus-q-desc">
   Located at Rizal Avenue, Batangas City, Pablo Borbon is the oldest and main
@@ -47,18 +45,48 @@
     </ul>
   </div>
 </div>
-</div> */}
+</div> */
+
+// {
+//   "branch_name": "Pablo Borbon Campus",
+//   "article": "Located at Rizal Avenue, Batangas City, Pablo Borbon is the oldest and main campus of the university and serves as the seat of the administration of the institution. It spans 5.96 hectares and provides excellent proximity to Batangas International Port and the Southern Tagalog Arterial Road (STAR).",
+//   "contacts": [
+//     { "type": "phone", "value": "779-8400" },
+//     { "type": "phone", "value": "406-8800" }
+//   ],
+//   "colleges": [
+//     "College of Accountancy, Business, Economics, and International Hospitality Management",
+//     "College of Arts and Sciences",
+//     "College of Law",
+//     "College of Nursing and Allied Health Sciences",
+//     "College of Teacher Education"
+//   ],
+//   "address": "Rizal Avenue, Batangas City"
+// }
+
+// prefix "gc" means Generate Container
 
 class CreatePreview {
   constructor(data) {
-
+    this.data = Object.assign({}, data);
+    this.base_element = document.createElement("div");
+    this.hero_branch_na = "no-prev.png";
   }
 
-  render() {
+  gc_branches_img() {
+    const e = document.createElement("div");
 
+    let hero = this.hero_branch_na;
+
+    if ("branch_hero" in this.data && !!this.data.branch_hero) {
+      hero = this.data.branch_hero;
+    }
+
+    e.setAttribute("style", `background-image: url("./assets/branches-img/${hero}")`);
+    this.base_element.appendChild(e);
   }
 
-  element() {
+  render() {}
 
-  }
+  element() {}
 }
