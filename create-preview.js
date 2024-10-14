@@ -83,10 +83,125 @@ class CreatePreview {
     }
 
     e.setAttribute("style", `background-image: url("./assets/branches-img/${hero}")`);
+    e.classList.add("no-enlarge-prev");
+
     this.base_element.appendChild(e);
   }
 
-  render() {}
+  gc_title_n_addr() {
+    const title = document.createElement("h3");
+    const addr = document.createElement("span");
 
-  element() {}
+    title.classList.add("campus-q-camp");
+    addr.classList.add("campus-q-caddrs");
+
+    title.appendChild(document.createTextNode(this.data.branch_name));
+    addr.appendChild(document.createTextNode(this.data.address));
+
+    this.base_element.appendChild(title);
+    this.base_element.appendChild(addr);
+  }
+
+  gc_desc() {
+    const e = document.createElement("p");
+
+    e.classList.add("campus-q-desc");
+
+    e.appendChild(document.createTextNode(this.data.article));
+
+    this.base_element.appendChild(e);
+  }
+
+  gc_colg() {
+    const base = document.createElement("div");
+    const label = document.createElement("label");
+    const ul = document.createElement("ul");
+
+    base.classList.add("campus-q-colg");
+    label.setAttribute("for", "bachelors-list");
+    ul.id = "bachelors-list";
+
+    label.appendChild(document.createTextNode("Colleges"));
+
+    (this.data.colleges || []).forEach(function (item) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(item));
+      ul.appendChild(li);
+    });
+
+    base.appendChild(label);
+    base.appendChild(ul);
+
+    this.base_element.appendChild(base);
+  }
+
+  #gc_sub_contacts(name, list) {
+    const base = document.createElement("div");
+    const label = document.createElement("label");
+    const ul = document.createElement("ul");
+
+    label.appendChild(document.createTextNode(name));
+
+    label.setAttribute("for", `contact-${name}`);
+    ul.id = `contact-${name}`;
+
+    list.forEach(function (item) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(item));
+      ul.appendChild(li);
+    });
+
+    base.appendChild(label);
+    base.appendChild(ul);
+
+    return base;
+  }
+
+  gc_contacts() {
+    const base = document.createElement("div");
+    const base_title = document.createElement("div");
+
+    base.classList.add("campus-q-cpts");
+
+    base_title.appendChild(document.createTextNode("Contacts"));
+
+    const phone = [];
+    const email = [];
+
+    (this.data.contacts || []).forEach(function (item) {
+      if (item.type.toLowerCase() === "phone") {
+        phone.push(item.value);
+        return;
+      }
+      if (item.type.toLowerCase() === "email") {
+        email.push(item.value);
+        return;
+      }
+    });
+
+    base.appendChild(base_title);
+
+    if (phone.length > 0) {
+      base.appendChild(this.#gc_sub_contacts("Phones", phone));
+    }
+
+    if (email.length > 0) {
+      base.appendChild(this.#gc_sub_contacts("Email", email));
+    }
+
+    this.base_element.appendChild(base);
+  }
+
+  render() {
+    // Order of declaration relies on execution
+    this.gc_branches_img();
+    this.gc_title_n_addr();
+    this.gc_desc();
+    this.gc_colg();
+    this.gc_contacts();
+  }
+
+  element() {
+    return this.base_element;
+  }
 }

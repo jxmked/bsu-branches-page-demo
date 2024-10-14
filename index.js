@@ -35,6 +35,16 @@
   w.addEventListener("DOMContentLoaded", async function () {
     const feed_data = await load_feed(feed_url);
 
+    const campus_container = document.getElementById("campus-prev-container");
+
+
+    const obj = new CreatePreview(feed_data[2]);
+    obj.render();
+
+    campus_container.classList.remove("campus-prev-idle");
+
+    campus_container.appendChild(obj.element());
+
     let index = 0;
 
     const list_items = [];
