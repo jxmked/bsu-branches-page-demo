@@ -91,7 +91,7 @@ div.container > div.campus-list > ul > li.visible-now {
 }
 
 div.container > div.campus-list > ul > li:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
 div.container > div.campus-list > ul > li > h5 {
