@@ -72,16 +72,25 @@ class CreatePreview {
     this.base_element = document.createElement("div");
     this.hero_branch_na = "no-prev.png";
     this.is_rendered = false;
+    this.hero_prev_callback = function () {};
+    this.enlargable = true;
   }
 
   gc_branches_img() {
     const e = document.createElement("div");
+    const self = this;
 
     if ("branch_hero" in this.data && !!this.data.branch_hero) {
       e.setAttribute(
         "style",
         `background-image: url("./assets/branches-img/${this.data.branch_hero}")`
       );
+
+      if (self.enlargable)
+        e.addEventListener("click", function () {
+          self.hero_prev_callback();
+        });
+      else e.classList.add("no-enlarge-prev");
     } else {
       e.setAttribute(
         "style",

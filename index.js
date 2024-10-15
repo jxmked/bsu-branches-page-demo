@@ -57,7 +57,13 @@
       const item = create_campus_item(data);
       list_items[cur_index] = item;
 
-      prev_selection_list[cur_index] = new CreatePreview(data).render().element;
+      const createPrev = new CreatePreview(data).render();
+      createPrev.hero_prev_callback = function () {
+        const imgPrevr = new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
+        
+      };
+      prev_selection_list[cur_index] = createPrev.element;
+
       prev_selection_list[cur_index].classList.add("hidden");
       frag.appendChild(prev_selection_list[cur_index]);
 
