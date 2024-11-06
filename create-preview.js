@@ -67,25 +67,85 @@
 // prefix "gc" means Generate Container
 
 class CreatePreview {
+  /**
+   *
+   * @param {FeedData} data
+   */
   constructor(data) {
+    /**
+     * Main data
+     *
+     * @type {FeedData}
+     */
     this.data = Object.assign({}, data);
+
+    /**
+     * Base element
+     *
+     * @type {HTMLDivElement}
+     */
     this.base_element = document.createElement("div");
+
+    /**
+     * Available image if no campus image provided
+     *
+     * @type {String}
+     */
     this.hero_branch_na = "no-prev.png";
+
+    /**
+     * Is Rendered?
+     *
+     * @type {Boolean}
+     */
     this.is_rendered = false;
+
+    /**
+     * Click function if we can enlarge image
+     *
+     * @type {Function}
+     */
     this.hero_prev_callback = function () {};
+
+    /**
+     * Automatically set image to be enlargable if the
+     * preview of the campus is available
+     *
+     * @type {Boolean}
+     */
     this.enlargable = true;
   }
 
+  /**
+   * Generate image container and place the image
+   *
+   */
   gc_branches_img() {
+    /**
+     * @type {HTMLDivElement}
+     */
     const e = document.createElement("div");
+
+    /**
+     * Keeping the instance accesible
+     *
+     * @type {ThisType}
+     */
     const self = this;
 
+    /**
+     * IS campus image available?
+     * If does, use it instead of default "no image avalable"
+     */
     if ("branch_hero" in this.data && !!this.data.branch_hero) {
       e.setAttribute(
         "style",
         `background-image: url("./assets/branches-img/${this.data.branch_hero}")`
       );
 
+      /**
+       * Also make the image enlargable
+       */
       if (self.enlargable)
         e.addEventListener("click", function () {
           self.hero_prev_callback();
@@ -102,8 +162,18 @@ class CreatePreview {
     this.base_element.appendChild(e);
   }
 
+  /**
+   * Create the title and address of placeholder
+   */
   gc_title_n_addr() {
+    /**
+     * @type {HTMLHeadingElement}
+     */
     const title = document.createElement("h3");
+
+    /**
+     * @type {HTMLSpanElement}
+     */
     const addr = document.createElement("span");
 
     title.classList.add("campus-q-camp");
@@ -116,7 +186,13 @@ class CreatePreview {
     this.base_element.appendChild(addr);
   }
 
+  /**
+   * Create campus description plaeholder
+   */
   gc_desc() {
+    /**
+     * @type {HTMLParagraphElement}
+     */
     const e = document.createElement("p");
 
     e.classList.add("campus-q-desc");
@@ -126,9 +202,23 @@ class CreatePreview {
     this.base_element.appendChild(e);
   }
 
+  /**
+   * Create campus available majors
+   */
   gc_colg() {
+    /**
+     * @type {HTMLDivElement}
+     */
     const base = document.createElement("div");
+
+    /**
+     * @type {HTMLLabelElement}
+     */
     const label = document.createElement("label");
+
+    /**
+     * @type {HTMLUListElement}
+     */
     const ul = document.createElement("ul");
 
     base.classList.add("campus-q-colg");
@@ -138,6 +228,9 @@ class CreatePreview {
     label.appendChild(document.createTextNode("Colleges"));
 
     (this.data.colleges || []).forEach(function (item) {
+      /**
+       * @type {HTMLLIElement}
+       */
       const li = document.createElement("li");
       li.appendChild(document.createTextNode(item));
       ul.appendChild(li);
@@ -149,9 +242,26 @@ class CreatePreview {
     this.base_element.appendChild(base);
   }
 
+  /**
+   *
+   * @param {String} name
+   * @param {FeedData.colleges} list
+   * @returns {HTMLDivElement}
+   */
   #gc_sub_contacts(name, list) {
+    /**
+     * @type {HTMLDivElement}
+     */
     const base = document.createElement("div");
+
+    /**
+     * @type {HTMLLabelElement}
+     */
     const label = document.createElement("label");
+
+    /**
+     * @type {HTMLUListElement}
+     */
     const ul = document.createElement("ul");
 
     label.appendChild(document.createTextNode(name));
@@ -160,6 +270,9 @@ class CreatePreview {
     ul.id = `contact-${name}`;
 
     list.forEach(function (item) {
+      /**
+       * @type {HTMLLIElement}
+       */
       const li = document.createElement("li");
       li.appendChild(document.createTextNode(item));
       ul.appendChild(li);
@@ -171,16 +284,38 @@ class CreatePreview {
     return base;
   }
 
+  /**
+   * Create contacts placeholder
+   */
   gc_contacts() {
+    /**
+     * @type {HTMLDivElement}
+     */
     const base = document.createElement("div");
+
+    /**
+     * @type {HTMLDivElement}
+     */
     const base_title = document.createElement("div");
 
     base.classList.add("campus-q-cpts");
 
     base_title.appendChild(document.createTextNode("Contacts"));
 
+    /**
+     *@type {Array.<String>}
+     */
     const phone = [];
+
+    /**
+     *@type {Array.<String>}
+     */
     const email = [];
+
+    
+    /**
+     *@type {Boolean}
+     */
     let is_contacts_avail = false;
 
     (this.data.contacts || []).forEach(function (item) {
@@ -209,6 +344,11 @@ class CreatePreview {
     if (is_contacts_avail) this.base_element.appendChild(base);
   }
 
+  /**
+   * Begin creating everything
+   * 
+   * @returns {ThisType}
+   */
   render() {
     if (this.is_rendered) return;
     this.is_rendered = true;
@@ -223,6 +363,9 @@ class CreatePreview {
     return this;
   }
 
+  /**
+   * @type {HTMLDivElement}
+   */
   get element() {
     return this.base_element;
   }

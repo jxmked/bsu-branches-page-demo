@@ -1,5 +1,15 @@
 (function (w, feed_url) {
+  /**
+   * Load campuses to be display
+   *
+   * @param {string} feed_url
+   * @returns {Promise.<Array.<FeedData>>}
+   * @throws {Error}
+   */
   async function load_feed(feed_url) {
+    /**
+     * @type {fetch}
+     */
     const res = await fetch(`./${feed_url}`, {
       method: "GET",
     });
@@ -11,9 +21,32 @@
     throw new Error("Unable to read feed right now. :(");
   }
 
+  /**
+   *
+   * @param {FeedData} feed_data_item
+   * @param {Function} click_callback
+   * @returns {HTMLLIElement}
+   */
   function create_campus_item(feed_data_item, click_callback) {
+    /**
+     * We're placing all things as a list item
+     *
+     * @type {HTMLLIElement}
+     */
     const li = document.createElement("li");
+
+    /**
+     * This will be the title of the item. The campus name
+     *
+     * @type {HTMLHeadingElement}
+     */
     const h5 = document.createElement("h5");
+
+    /**
+     * This will be the address of the campus
+     *
+     * @type {HTMLParagraphElement}
+     */
     const p = document.createElement("p");
 
     h5.innerText = feed_data_item.branch_name;
@@ -22,7 +55,9 @@
     li.appendChild(h5);
     li.appendChild(p);
 
-    li.addEventListener("click", click_callback);
+    // If we have ready callback, why not all it when needed
+    if (click_callback) li.addEventListener("click", click_callback);
+
     li.classList.add("on-animate");
 
     return li;
@@ -31,15 +66,34 @@
   function list_item_click_event() {}
 
   w.addEventListener("DOMContentLoaded", async function () {
+    /**
+     * @type {Array.<FeedData>}
+     */
     const feed_data = await load_feed(feed_url);
 
+    /**
+     * @type {HTMLDivElement}
+     */
     const campus_container = document.getElementById("campus-prev-container");
 
+    /**
+     * @type {Number}
+     */
     let index = 0;
 
+    /**
+     * @type {Array.<ReturnType.<create_campus_item>>}
+     */
     const list_items = [];
 
+    /**
+     * We will storing campus data here to be use later
+     * 
+     * @type {DocumentFragment}
+     */
     const frag = new DocumentFragment();
+
+
     const prev_selection_list = new Array(feed_data.length);
 
     let ival = setInterval(function () {
@@ -59,13 +113,15 @@
 
       const createPrev = new CreatePreview(data).render();
       createPrev.hero_prev_callback = function () {
-        const imgPrevr = new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
-        
+        const imgPrevr = new ImagePreviewer(
+          `./assets/branches-img/${data.branch_hero}`,
+          document.body
+        );
       };
       prev_selection_list[cur_index] = createPrev.element;
 
       prev_selection_list[cur_index].classList.add("hidden");
-      frag.appendChild(prev_selection_list[cur_index]);
+      // frag.appendChild(prev_selection_list[cur_index]);
 
       setTimeout(() => {
         item.classList.add("visible-now");
