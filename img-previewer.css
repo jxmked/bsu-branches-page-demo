@@ -10,4 +10,6 @@ canvas._img_previewer_element_xio {
   transform: translate(-50%, -50%);
   border: none;
   z-index: 9999999;
+  max-width: 100vw;
+  max-height: 100vh;
 }

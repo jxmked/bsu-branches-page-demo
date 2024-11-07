@@ -6,7 +6,7 @@
 /**
  *
  * @param {Dim2} oldDim
- * @param {Object.<string, Number>} newDim
+ * @param {Object.<String, Number>} newDim
  * @returns {Dim2}
  */
 function rescaleDim(oldDim, newDim) {
@@ -30,35 +30,39 @@ function rescaleDim(oldDim, newDim) {
 }
 
 class ImagePreviewer {
-
   /**
-   * 
-   * @param {string} src 
-   * @param {HTMLElement} parent_node 
+   *
+   * @param {string} src
+   * @param {HTMLElement} parent_node
    */
   constructor(src, parent_node) {
+    /**
+     * @readonly
+     * @type {typeof src}
+     */
     this.img_src = src;
-    this.target_parent_node = parent_node;
 
-    this.load_src_img().then(function (result) {
-      console.log(result.width, result.height);
-    });
+    /**
+     * @readonly
+     * @type {typeof parent_node}
+     */
+    this.target_parent_node = parent_node;
 
     /**
      * @readonly
      * @type {HTMLCanvasElement}
      */
-    this.CANVAS = document.createElement("canvas");
-    this.CANVAS.width = this.CANVAS.width * 2;
-    this.CANVAS.height = this.CANVAS.height * 2;
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = window.innerWidth * window.devicePixelRatio;
+    this.canvas.height = window.innerHeight * window.devicePixelRatio;
 
-    this.CANVAS.classList.add("_img_previewer_element_xio");
+    this.canvas.classList.add("_img_previewer_element_xio");
 
     /**
      * @readonly
      * @type {CanvasRenderingContext2D}
      */
-    this.CTX = this.CANVAS.getContext("2d");
+    this.ctx = this.canvas.getContext("2d");
 
     /**
      * @type {{size: Number,pos: Vec2}}
@@ -71,11 +75,68 @@ class ImagePreviewer {
         y: 0,
       },
     };
+
+    /**
+     * @readonly
+     * @type {ImagePreviewer}
+     */
+    const self = this;
+
+    this.load_src_img().then(function (img) {
+      const { width, height } = img;
+      const { width: cw, height: ch } = self.canvas;
+
+      /**
+       * @type {Dim2}
+       */
+      const image_vec = Object.assign({}, { width, height });
+
+      if (cw > ch) {
+        Object.assign(image_vec, rescaleDim(image_vec, { height: ch }));
+      } else {
+        Object.assign(image_vec, rescaleDim(image_vec, { width: cw }));
+      }
+
+      const ctx = self.ctx;
+
+      const { ch: h, cw: w } = { ch, cw };
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.imageSmoothingEnabled = false;
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(0,0,0,0.4)";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.save();
+
+      const half_iw = image_vec.width / 2;
+      const half_ih = image_vec.height / 2;
+      const half_cw = w / 2;
+      const half_ch = h / 2;
+
+      console.log(half_ch - half_ih, half_cw, half_ih, half_iw);
+
+      ctx.fillStyle = "red";
+      ctx.arc(half_cw - half_iw, half_ch, 5, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.drawImage(
+        img,
+        half_cw - half_iw,
+        half_ch - half_ih,
+        image_vec.width,
+        image_vec.height
+      );
+
+      ctx.restore();
+
+      self.target_parent_node.appendChild(self.canvas);
+    });
   }
 
   loop() {
-    const ctx = this.CTX;
-    const canvas = this.CANVAS;
+    const ctx = this.ctx;
+    const canvas = this.canvas;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
@@ -108,6 +169,10 @@ class ImagePreviewer {
 
   open_canvas(img) {}
 
+  /**
+   *
+   * @returns {Promise.<Image>}
+   */
   load_src_img() {
     const self = this;
 

@@ -129,7 +129,7 @@ class CreatePreview {
     /**
      * Keeping the instance accesible
      *
-     * @type {ThisType}
+     * @type {CreatePreview}
      */
     const self = this;
 
@@ -312,7 +312,6 @@ class CreatePreview {
      */
     const email = [];
 
-    
     /**
      *@type {Boolean}
      */
@@ -346,8 +345,8 @@ class CreatePreview {
 
   /**
    * Begin creating everything
-   * 
-   * @returns {ThisType}
+   *
+   * @returns {CreatePreview}
    */
   render() {
     if (this.is_rendered) return;

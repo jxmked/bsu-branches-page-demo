@@ -88,14 +88,24 @@
 
     /**
      * We will storing campus data here to be use later
-     * 
+     *
      * @type {DocumentFragment}
      */
     const frag = new DocumentFragment();
 
-
+    /**
+     * Here we're storing list item for selection
+     *
+     * @type {Array.<ReturnType.<CreatePreview.element>>}
+     */
     const prev_selection_list = new Array(feed_data.length);
 
+    /**
+     * We use interval instead of single thread loop
+     * to allow us to display the current created list item
+     *
+     * @type {ReturnType.<setInterval>}
+     */
     let ival = setInterval(function () {
       if (index >= feed_data.length) {
         clearInterval(ival);
@@ -104,16 +114,34 @@
         return;
       }
 
+      /**
+       * We keep the current index with its item.
+       * If we use the index variable outside this
+       * function it cause to use the updated and wrong index
+       * instead of the index we used for each element.
+       *
+       * @type {typeof index}
+       */
       let cur_index = index;
 
+      /**
+       * @type {FeedData}
+       */
       const data = feed_data[cur_index];
 
+      /**
+       * @type {ReturnType.<create_campus_item>}
+       */
       const item = create_campus_item(data);
       list_items[cur_index] = item;
 
+      /**
+       * @type {CreatePreview}
+       */
       const createPrev = new CreatePreview(data).render();
+
       createPrev.hero_prev_callback = function () {
-        const imgPrevr = new ImagePreviewer(
+        new ImagePreviewer(
           `./assets/branches-img/${data.branch_hero}`,
           document.body
         );
@@ -121,7 +149,7 @@
       prev_selection_list[cur_index] = createPrev.element;
 
       prev_selection_list[cur_index].classList.add("hidden");
-      // frag.appendChild(prev_selection_list[cur_index]);
+      frag.appendChild(prev_selection_list[cur_index]);
 
       setTimeout(() => {
         item.classList.add("visible-now");
