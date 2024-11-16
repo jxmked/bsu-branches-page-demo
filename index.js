@@ -141,17 +141,20 @@
       const createPrev = new CreatePreview(data).render();
 
       createPrev.hero_prev_callback = function () {
-        new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
+        const img_prev = new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
+
+
+        img_prev.display();
 
         let is_hold = false;
 
         function close_image_viewer_down(evt) {
-          console.log("fuck it ")
+          img_prev.clear();
+
           w.removeEventListener("keydown", close_image_viewer_down);
         }
 
         function close_image_viewer_up(evt) {
-
           w.removeEventListener("keyup", close_image_viewer_up);
         }
 

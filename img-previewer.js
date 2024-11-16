@@ -75,7 +75,13 @@ class ImagePreviewer {
         y: 0,
       },
     };
+  }
 
+  clear() {
+    this.canvas.remove();
+  }
+
+  display() {
     /**
      * @readonly
      * @type {ImagePreviewer}
