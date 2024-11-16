@@ -141,10 +141,23 @@
       const createPrev = new CreatePreview(data).render();
 
       createPrev.hero_prev_callback = function () {
-        new ImagePreviewer(
-          `./assets/branches-img/${data.branch_hero}`,
-          document.body
-        );
+        new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
+
+        let is_hold = false;
+
+        function close_image_viewer_down(evt) {
+          console.log("fuck it ")
+          w.removeEventListener("keydown", close_image_viewer_down);
+        }
+
+        function close_image_viewer_up(evt) {
+
+          w.removeEventListener("keyup", close_image_viewer_up);
+        }
+
+        w.addEventListener("keyup", close_image_viewer_up);
+
+        w.addEventListener("keydown", close_image_viewer_down);
       };
       prev_selection_list[cur_index] = createPrev.element;
 

@@ -92,9 +92,9 @@ class ImagePreviewer {
       const image_vec = Object.assign({}, { width, height });
 
       if (cw > ch) {
-        Object.assign(image_vec, rescaleDim(image_vec, { height: ch }));
+        Object.assign(image_vec, rescaleDim(image_vec, { height: ch * 0.9 }));
       } else {
-        Object.assign(image_vec, rescaleDim(image_vec, { width: cw }));
+        Object.assign(image_vec, rescaleDim(image_vec, { width: cw * 0.9 }));
       }
 
       const ctx = self.ctx;
