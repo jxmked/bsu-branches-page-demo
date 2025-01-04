@@ -31,6 +31,17 @@ function rescaleDim(oldDim, newDim) {
 
 class ImagePreviewer {
   /**
+   * @typedef
+   * @readonly
+   * @private
+   * @static
+   * @type {object}
+   * @property {Number} width
+   * @property {Number} height
+   */
+  static btn_dimension = { width: 100, height: 100 };
+
+  /**
    *
    * @param {string} src
    * @param {HTMLElement} parent_node
@@ -77,13 +88,21 @@ class ImagePreviewer {
     };
   }
 
+  /**
+   * @returns {HTMLCanvasElement}
+   */
+  get img_canvas() {
+    return this.canvas;
+  }
+
   show_close_btn() {
     const { canvas, ctx } = this;
 
+    const { btn_dimension } = ImagePreviewer;
+
     const { width, height } = canvas;
-    const btn_dimension = { width: 100, height: 100 };
-    const pos_x = width * 0.9 - (btn_dimension.width >> 1);
-    const pos_y = height * 0.1 - (btn_dimension.height >> 1);
+    const pos_x = width * 0.9 - btn_dimension.width / 2;
+    const pos_y = height * 0.1 - btn_dimension.height / 2;
 
     const close_btn_container = new Path2D(
       "M20 0h60q20 0 20 20v60q0 20-20 20H20Q0 100 0 80V20Q0 0 20 0z"
@@ -94,19 +113,39 @@ class ImagePreviewer {
 
     ctx.translate(pos_x, pos_y);
     ctx.scale(0.32, 0.32);
-    
-    ctx.fillStyle = "rgba(250, 250, 250, 0.7)";
+
+    ctx.fillStyle = "rgb(199, 199, 204)";
     ctx.fill(close_btn_container);
 
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "rgb(44, 44, 46)";
     ctx.lineWidth = 1;
     ctx.stroke(close_btn_container);
 
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = "4";
+    ctx.strokeStyle = "rgb(44, 44, 46)";
+    ctx.lineWidth = "7";
     ctx.stroke(close_btn_cross);
 
     ctx.restore();
+  }
+
+  is_close_checked(x, y) {
+    const { canvas, ctx } = this;
+    const btn_dimension = ImagePreviewer.btn_dimension;
+
+    const { width, height } = canvas;
+
+    const pos_x = width * 0.9 - btn_dimension.width / 2;
+    const pos_y = height * 0.1 - btn_dimension.height / 2;
+
+    if (!(x >= pos_x && x <= pos_x + btn_dimension.width / 2)) {
+      return false;
+    }
+
+    if (!(y >= pos_y && y <= pos_y + btn_dimension.height / 2)) {
+      return false;
+    }
+
+    return true;
   }
 
   clear() {

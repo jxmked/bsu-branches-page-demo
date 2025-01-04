@@ -63,7 +63,13 @@
     return li;
   }
 
-  function list_item_click_event() {}
+  function getBoundedPosition(canvas, { x, y }) {
+    const { left, top, width, height } = canvas.getBoundingClientRect();
+    const dx = ((x - left) / width) * canvas.width;
+    const dy = ((y - top) / height) * canvas.height;
+
+    return { x: dx, y: dy };
+  }
 
   w.addEventListener("DOMContentLoaded", async function () {
     /**
@@ -141,27 +147,62 @@
       const createPrev = new CreatePreview(data).render();
 
       createPrev.hero_prev_callback = function () {
-        const img_prev = new ImagePreviewer(`./assets/branches-img/${data.branch_hero}`, document.body);
-
+        const img_prev = new ImagePreviewer(
+          `./assets/branches-img/${data.branch_hero}`,
+          document.body
+        );
 
         img_prev.display();
 
-        let is_hold = false;
-
-        function close_image_viewer_down(evt) {
-          img_prev.clear();
-
-          w.removeEventListener("keydown", close_image_viewer_down);
-        }
-
+        /**
+         *
+         * @param {MouseEvent} evt
+         */
         function close_image_viewer_up(evt) {
+          const { clientX, clientY } = evt;
+
+          const actual_mouse_position = getBoundedPosition(img_prev.img_canvas, {
+            x: clientX,
+            y: clientY,
+          });
+          if (
+            img_prev.is_close_checked(actual_mouse_position.x, actual_mouse_position.y)
+          ) {
+            img_prev.clear();
+          }
+
           w.removeEventListener("keyup", close_image_viewer_up);
         }
+        w.addEventListener("mouseup", close_image_viewer_up);
 
-        w.addEventListener("keyup", close_image_viewer_up);
+        const touch_movement = { clientX: 0, clientY: 0 };
 
-        w.addEventListener("keydown", close_image_viewer_down);
+        /**
+         * @function
+         * @inner
+         * @param {TouchEvent} evt
+         */
+        w.addEventListener("touchstart", function (evt) {
+          Object.assign(touch_movement, evt.touches[0]);
+        });
+
+        /**
+         * @function
+         * @inner
+         * @param {TouchEvent} evt
+         */
+        w.addEventListener("touchmove", function (evt) {
+          if (evt.touches[0] !== void 0) {
+            Object.assign(touch_movement, evt.touches[0]);
+            return;
+          }
+        });
+
+        w.addEventListener("touchend", function (evt) {
+          close_image_viewer_up(touch_movement);
+        });
       };
+
       prev_selection_list[cur_index] = createPrev.element;
 
       prev_selection_list[cur_index].classList.add("hidden");
