@@ -77,6 +77,38 @@ class ImagePreviewer {
     };
   }
 
+  show_close_btn() {
+    const { canvas, ctx } = this;
+
+    const { width, height } = canvas;
+    const btn_dimension = { width: 100, height: 100 };
+    const pos_x = width * 0.9 - (btn_dimension.width >> 1);
+    const pos_y = height * 0.1 - (btn_dimension.height >> 1);
+
+    const close_btn_container = new Path2D(
+      "M20 0h60q20 0 20 20v60q0 20-20 20H20Q0 100 0 80V20Q0 0 20 0z"
+    );
+    const close_btn_cross = new Path2D("m15 15 70 70m0-70L15 85");
+
+    ctx.save();
+
+    ctx.translate(pos_x, pos_y);
+    ctx.scale(0.32, 0.32);
+    
+    ctx.fillStyle = "rgba(250, 250, 250, 0.7)";
+    ctx.fill(close_btn_container);
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 1;
+    ctx.stroke(close_btn_container);
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = "4";
+    ctx.stroke(close_btn_cross);
+
+    ctx.restore();
+  }
+
   clear() {
     this.canvas.remove();
   }
@@ -137,6 +169,8 @@ class ImagePreviewer {
       ctx.restore();
 
       self.target_parent_node.appendChild(self.canvas);
+
+      self.show_close_btn();
     });
   }
 
