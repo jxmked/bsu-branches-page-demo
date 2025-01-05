@@ -31,13 +31,7 @@ function rescaleDim(oldDim, newDim) {
 
 class ImagePreviewer {
   /**
-   * @typedef
-   * @readonly
-   * @private
-   * @static
-   * @type {object}
-   * @property {Number} width
-   * @property {Number} height
+   * @type {{width: Number,height: Number}}}
    */
   static btn_dimension = { width: 100, height: 100 };
 
@@ -95,10 +89,15 @@ class ImagePreviewer {
     return this.canvas;
   }
 
+  /**
+   * This function creates an X button to be display.
+   * Instead of using an actual picture, We have created\
+   * the image using SVG path.
+   */
   show_close_btn() {
     const { canvas, ctx } = this;
 
-    const { btn_dimension } = ImagePreviewer;
+    const btn_dimension = ImagePreviewer.btn_dimension;
 
     const { width, height } = canvas;
     const pos_x = width * 0.9 - btn_dimension.width / 2;
@@ -128,8 +127,16 @@ class ImagePreviewer {
     ctx.restore();
   }
 
+  /**
+   * This function check whether the clicks where done inside of
+   * an X image and return boolean if does.
+   *
+   * @param {Number} x
+   * @param {Number} y
+   * @returns {Boolean}
+   */
   is_close_checked(x, y) {
-    const { canvas, ctx } = this;
+    const { canvas } = this;
     const btn_dimension = ImagePreviewer.btn_dimension;
 
     const { width, height } = canvas;
@@ -152,6 +159,10 @@ class ImagePreviewer {
     this.canvas.remove();
   }
 
+  /**
+   * This function performs getting the image from source
+   * and rendering it into canvas.
+   */
   display() {
     /**
      * @readonly
@@ -184,28 +195,32 @@ class ImagePreviewer {
       ctx.fillStyle = "rgba(0,0,0,0.4)";
       ctx.fillRect(0, 0, w, h);
 
-      ctx.save();
-
-      const half_iw = image_vec.width / 2;
-      const half_ih = image_vec.height / 2;
-      const half_cw = w / 2;
-      const half_ch = h / 2;
-
-      console.log(half_ch - half_ih, half_cw, half_ih, half_iw);
-
-      ctx.fillStyle = "red";
-      ctx.arc(half_cw - half_iw, half_ch, 5, 0, 2 * Math.PI);
-      ctx.fill();
-
-      ctx.drawImage(
+      self.place_image(
         img,
-        half_cw - half_iw,
-        half_ch - half_ih,
-        image_vec.width,
-        image_vec.height
+        image_vec,
+        {
+          x: w / 2,
+          y: h / 2,
+        },
+        1
       );
 
-      ctx.restore();
+      // ctx.save();
+
+      // const half_iw = image_vec.width / 2;
+      // const half_ih = image_vec.height / 2;
+      // const half_cw = w / 2;
+      // const half_ch = h / 2;
+
+      // ctx.drawImage(
+      //   img,
+      //   half_cw - half_iw,
+      //   half_ch - half_ih,
+      //   image_vec.width,
+      //   image_vec.height
+      // );
+
+      // ctx.restore();
 
       self.target_parent_node.appendChild(self.canvas);
 
@@ -213,17 +228,10 @@ class ImagePreviewer {
     });
   }
 
-  loop() {
-    const ctx = this.ctx;
-    const canvas = this.canvas;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
   /**
    *
    * @param {Image} img
-   * @param {Number} size
+   * @param {Dim2} size
    * @param {Vec2} pos
    * @param {Vec2} scale
    */
@@ -231,22 +239,20 @@ class ImagePreviewer {
     const ctx = this.ctx;
 
     const half_size = {
-      x: size.x * 0.5,
-      y: size.y * 0.5,
+      width: size.width * 0.5,
+      height: size.height * 0.5,
     };
 
     ctx.save();
 
-    ctx.translate(pos.x - half_size.x, pos.y - half_size.y);
+    ctx.translate(pos.x - half_size.width, pos.y - half_size.height);
 
     ctx.scale(scale, scale);
 
-    ctx.drawImage(img, 0, 0, size.x, size.y);
+    ctx.drawImage(img, 0, 0, size.width, size.height);
 
     ctx.restore();
   }
-
-  open_canvas(img) {}
 
   /**
    *

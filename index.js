@@ -159,6 +159,11 @@
          * @param {MouseEvent} evt
          */
         function close_image_viewer_up(evt) {
+          /**
+           * @type {object}
+           * @property {Number} clientX
+           * @property {Number} clientY
+           */
           const { clientX, clientY } = evt;
 
           const actual_mouse_position = getBoundedPosition(img_prev.img_canvas, {
@@ -173,8 +178,12 @@
 
           w.removeEventListener("keyup", close_image_viewer_up);
         }
-        w.addEventListener("mouseup", close_image_viewer_up);
 
+        /**
+         * @type {object}
+         * @property {Number} clientX
+         * @property {Number} clientY
+         */
         const touch_movement = { clientX: 0, clientY: 0 };
 
         /**
@@ -194,13 +203,19 @@
         w.addEventListener("touchmove", function (evt) {
           if (evt.touches[0] !== void 0) {
             Object.assign(touch_movement, evt.touches[0]);
-            return;
           }
         });
 
+        /**
+         * @function
+         * @inner
+         * @param {TouchEvent} evt
+         */
         w.addEventListener("touchend", function (evt) {
           close_image_viewer_up(touch_movement);
         });
+
+        w.addEventListener("mouseup", close_image_viewer_up);
       };
 
       prev_selection_list[cur_index] = createPrev.element;
