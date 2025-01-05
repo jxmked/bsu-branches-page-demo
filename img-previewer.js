@@ -205,23 +205,6 @@ class ImagePreviewer {
         1
       );
 
-      // ctx.save();
-
-      // const half_iw = image_vec.width / 2;
-      // const half_ih = image_vec.height / 2;
-      // const half_cw = w / 2;
-      // const half_ch = h / 2;
-
-      // ctx.drawImage(
-      //   img,
-      //   half_cw - half_iw,
-      //   half_ch - half_ih,
-      //   image_vec.width,
-      //   image_vec.height
-      // );
-
-      // ctx.restore();
-
       self.target_parent_node.appendChild(self.canvas);
 
       self.show_close_btn();
